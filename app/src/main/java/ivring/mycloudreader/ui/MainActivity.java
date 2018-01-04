@@ -26,12 +26,19 @@ import ivring.mycloudreader.adapter.MyFragmentPagerAdapter;
 import ivring.mycloudreader.app.ConstantsImageUrl;
 import ivring.mycloudreader.databinding.ActivityMainBinding;
 import ivring.mycloudreader.databinding.NavHeaderMainBinding;
+import ivring.mycloudreader.http.rx.RxBus;
+import ivring.mycloudreader.http.rx.RxBusBaseMessage;
+import ivring.mycloudreader.http.rx.RxCodeConstants;
 import ivring.mycloudreader.utils.CommonUtils;
 import ivring.mycloudreader.utils.ImgLoadUtil;
 import ivring.mycloudreader.utils.PerfectClickListener;
 import ivring.mycloudreader.utils.SPUtils;
 import ivring.mycloudreader.view.statusBar.StatusBarUtil;
+import rx.functions.Action1;
 
+/**
+ * 主页面
+ */
 public class MainActivity extends AppCompatActivity{
     private FrameLayout llTitleMenu;
     private Toolbar toolbar;
@@ -55,9 +62,8 @@ public class MainActivity extends AppCompatActivity{
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-//        initStatusView();
         initId();
-//        initRxBus();
+        initRxBus();
 //      用于设置抽屉NavigationView拉出来的时候状态栏样式为透明
         StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, drawerLayout,
                 CommonUtils.getColor(R.color.colorTheme));
@@ -71,11 +77,6 @@ public class MainActivity extends AppCompatActivity{
         initListener();
     }
 
-    private void initStatusView() {
-//        ViewGroup.LayoutParams layoutParams = mBinding.include.viewStatus.getLayoutParams();
-//        layoutParams.height = StatusBarUtil.getStatusBarHeight(this);
-//        mBinding.include.viewStatus.setLayoutParams(layoutParams);
-    }
 
     /**
      * 初始化控件
@@ -355,13 +356,13 @@ public class MainActivity extends AppCompatActivity{
     /**
      * 每日推荐点击"新电影热映榜"跳转
      */
-//    private void initRxBus() {
-//        RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, RxBusBaseMessage.class)
-//                .subscribe(new Action1<RxBusBaseMessage>() {
-//                    @Override
-//                    public void call(RxBusBaseMessage integer) {
-//                        mBinding.include.vpContent.setCurrentItem(1);
-//                    }
-//                });
-//    }
+    private void initRxBus() {
+        RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, RxBusBaseMessage.class)
+                .subscribe(new Action1<RxBusBaseMessage>() {
+                    @Override
+                    public void call(RxBusBaseMessage integer) {
+                        mBinding.include.vpContent.setCurrentItem(1);
+                    }
+                });
+    }
 }
