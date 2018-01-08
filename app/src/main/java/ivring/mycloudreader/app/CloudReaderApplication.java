@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 
+import ivring.http.HttpUtils;
+import ivring.mycloudreader.utils.DebugUtil;
+
 /**
  * Created by jingbin on 2016/11/22.
  */
@@ -21,7 +24,7 @@ public class CloudReaderApplication extends Application {
     public void onCreate() {
         super.onCreate();
         cloudReaderApplication = this;
-//        HttpUtils.getInstance().init(this, DebugUtil.DEBUG);
+        HttpUtils.getInstance().init(this, DebugUtil.DEBUG);
 
         initTextSize();
     }
