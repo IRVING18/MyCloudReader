@@ -1,1 +1,1 @@
-include ':app', ':xrecyclerview', ':http'
+include ':app', ':xrecyclerview', ':http', ':zoomlibrary'
